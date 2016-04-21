@@ -1,23 +1,26 @@
-package template.library;
+package shapeAgent;
 
-public class FloatIterator {
-  float[] arraySeq;
+public class ColorIterator {
+  int[] arraySeq;
   int index;
   int arrayLength;
   int max_index;
   boolean iter_complete;
 
-  public FloatIterator(float[] arraySequence) {
+
+  public ColorIterator(int[] arraySequence) {
     this.arraySeq = arraySequence;
     this.Initializer();
   }
 
-  public FloatIterator(float element) {
-    this.arraySeq = new float[1];
+
+  public ColorIterator(int element) {
+    this.arraySeq = new int[1];
     this.arraySeq[0] = element;
 
     this.Initializer();
   }
+
 
   public void Initializer() {
     this.arrayLength = this.arraySeq.length;
@@ -26,8 +29,9 @@ public class FloatIterator {
     this.iter_complete = false;
   }
 
-  public float next() {
-    float valueToReturn = this.arraySeq[this.index];
+
+  public int next() {
+    int valueToReturn = this.arraySeq[this.index];
     if (!this.iter_complete) {
       this.index += 1;
     }
@@ -39,9 +43,11 @@ public class FloatIterator {
     return valueToReturn;
   }
 
-  public float current() {
+
+  public int current() {
     return this.arraySeq[this.index];
   }
+
 
   public boolean hasNext() {
     return !this.iter_complete;

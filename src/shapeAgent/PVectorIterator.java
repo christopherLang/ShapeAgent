@@ -1,4 +1,4 @@
-package template.library;
+package shapeAgent;
 
 import processing.core.*;
 
@@ -10,10 +10,12 @@ public class PVectorIterator {
   boolean iter_complete;
   boolean perpetual;
 
+
   public PVectorIterator(PVector[] arraySequence) {
     this.arraySeq = arraySequence;
     this.Initializer();
   }
+
 
   public PVectorIterator(PVector increment) {
     this.arraySeq = new PVector[1];
@@ -22,12 +24,14 @@ public class PVectorIterator {
     this.perpetual = true;
   }
 
+
   public PVectorIterator(float x, float y) {
     PVector pointInSpace = new PVector(x, y);
     this.arraySeq = new PVector[1];
     this.arraySeq[0] = pointInSpace;
     this.Initializer();
   }
+
 
   private void Initializer() {
     this.arrayLength = this.arraySeq.length;
@@ -36,6 +40,7 @@ public class PVectorIterator {
     this.iter_complete = false;
     this.perpetual = false;
   }
+
 
   public PVector next() {
     PVector valueToReturn = this.arraySeq[this.index];
@@ -52,9 +57,11 @@ public class PVectorIterator {
     return valueToReturn;
   }
 
+
   public PVector current() {
     return this.arraySeq[this.index];
   }
+
 
   public boolean hasNext() {
     return !this.iter_complete;

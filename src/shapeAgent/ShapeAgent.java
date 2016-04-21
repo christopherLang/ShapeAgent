@@ -1,4 +1,4 @@
-package template.library;
+package shapeAgent;
 
 import processing.core.*;
 
@@ -42,11 +42,11 @@ public class ShapeAgent {
 
   PVector translateIncrement;
 
-//  PFont textFont;
-//  String textLabel = "";
-//  boolean enableText = false;
-//  int textJustify = PApplet.CENTER;
-//  int textFill;
+  // PFont textFont;
+  // String textLabel = "";
+  // boolean enableText = false;
+  // int textJustify = PApplet.CENTER;
+  // int textFill;
 
   ColorIterator stroke_iter;
   ColorIterator fill_iter;
@@ -61,6 +61,7 @@ public class ShapeAgent {
   Helpers helper;
   // public final static String VERSION = "##library.prettyVersion##";
 
+
   /**
    * a Constructor, usually called in the setup() method in your sketch to
    * initialize and start the Library.
@@ -70,12 +71,12 @@ public class ShapeAgent {
    */
   public ShapeAgent(PApplet processingApp) {
     this.papp = processingApp;
-    
+
     this.shpFill = this.papp.color(255, 255, 255);
     this.shpStroke = this.papp.color(255, 255, 255);
-//    this.textFont = this.papp.createFont("Arial", 14, true);
-//    this.textFill = this.papp.color(0, 0, 0);
-    
+    // this.textFont = this.papp.createFont("Arial", 14, true);
+    // this.textFill = this.papp.color(0, 0, 0);
+
     this.stroke_iter = new ColorIterator(this.shpStroke);
     this.fill_iter = new ColorIterator(this.shpFill);
     this.strokeAlpha_iter = new FloatIterator(shpStrokeAlpha);
@@ -84,11 +85,12 @@ public class ShapeAgent {
     this.strokeWeight_iter = new FloatIterator(this.shpStrokeWeight);
     this.velocity_iter = new PVectorIterator(0, 0);
     this.rotate_iter = new FloatIterator(0);
-    
+
     this.sequencer = new Sequencer(this.papp);
-    
+
     this.helper = new Helpers(this.papp);
   }
+
 
   public void setStrokeColor(int strokeColor, int steps, int type) {
     int[] colorGradient = this.sequencer.color_sequencer(shpStroke, strokeColor, steps, type);
@@ -97,13 +99,16 @@ public class ShapeAgent {
     this.finishedStroke = false;
   }
 
+
   public void setStrokeColor(int strokeColor, int steps) {
     this.setStrokeColor(strokeColor, steps, 1);
   }
 
+
   public void setStrokeColor(int strokeColor) {
     this.setStrokeColor(strokeColor, 1, 1);
   }
+
 
   public void setStrokeAlpha(float strokeOpacity, int steps, int type) {
     float[] opacityGradient = this.sequencer.value_sequencer(shpStrokeAlpha, strokeOpacity, steps, type);
@@ -111,13 +116,16 @@ public class ShapeAgent {
     this.finishedStrokeAlpha = false;
   }
 
+
   public void setStrokeAlpha(float strokeOpacity, int steps) {
     this.setStrokeAlpha(strokeOpacity, steps, 1);
   }
 
+
   public void setStrokeAlpha(float strokeOpacity) {
     this.setStrokeAlpha(strokeOpacity, 1, 1);
   }
+
 
   public void setStrokeThickness(float weight, int steps, int type) {
     float[] thicknessGradient = this.sequencer.value_sequencer(shpStrokeWeight, weight, steps, type);
@@ -126,13 +134,16 @@ public class ShapeAgent {
     this.finishedStrokeThickness = false;
   }
 
+
   public void setStrokeThickness(float weight, int steps) {
     this.setStrokeThickness(weight, steps, 1);
   }
 
+
   public void setStrokeThickness(float weight) {
     this.setStrokeThickness(weight, 1, 1);
   }
+
 
   public void setFillColor(int fillColor, int steps, int type) {
     int[] colorGradient = this.sequencer.color_sequencer(shpFill, fillColor, steps, type);
@@ -141,13 +152,16 @@ public class ShapeAgent {
     this.finishedFill = false;
   }
 
+
   public void setFillColor(int fillColor, int steps) {
     this.setFillColor(fillColor, steps, 1);
   }
 
+
   public void setFillColor(int fillColor) {
     this.setFillColor(fillColor, 1, 1);
   }
+
 
   public void setFillAlpha(float fillOpacity, int steps, int type) {
     float[] opacityGradient = this.sequencer.value_sequencer(shpFillAlpha, fillOpacity, steps, type);
@@ -156,33 +170,36 @@ public class ShapeAgent {
     this.finishedFillAlpha = false;
   }
 
+
   public void setFillAlpha(float fillOpacity, int steps) {
     this.setFillAlpha(fillOpacity, steps, 1);
   }
+
 
   public void setFillAlpha(float fillOpacity) {
     this.setFillAlpha(fillOpacity, 1, 1);
   }
 
-//  public void setLabel(String text) {
-//    this.textLabel = text;
-//  }
-//
-//  public void setLabelFont(PFont newFont) {
-//    this.textFont = newFont;
-//  }
-//
-//  public void setLabelJustify(int justify) {
-//    this.textJustify = justify;
-//  }
-//
-//  public void enableLabel(boolean turnOnLabel) {
-//    this.enableText = turnOnLabel;
-//  }
-//
-//  public void setLabelColor(int labelColor) {
-//    this.textFill = labelColor;
-//  }
+
+  // public void setLabel(String text) {
+  // this.textLabel = text;
+  // }
+  //
+  // public void setLabelFont(PFont newFont) {
+  // this.textFont = newFont;
+  // }
+  //
+  // public void setLabelJustify(int justify) {
+  // this.textJustify = justify;
+  // }
+  //
+  // public void enableLabel(boolean turnOnLabel) {
+  // this.enableText = turnOnLabel;
+  // }
+  //
+  // public void setLabelColor(int labelColor) {
+  // this.textFill = labelColor;
+  // }
 
   public void rotate(float degrees, int steps, int type) {
     float initAngle = this.shpRotation;
@@ -196,14 +213,34 @@ public class ShapeAgent {
     this.finishedRotating = false;
   }
 
+
   public void rotate(float degrees, int steps) {
     this.rotate(degrees, steps, 1);
   }
 
+
   public void rotate(float degrees) {
     this.rotate(degrees, 1, 1);
   }
+  
+  public void translate2(PVector newLoc,int steps,int type) {
+    steps = (steps < 1) ? 1 : steps;
+    this.newPosition = newLoc;
+    
+    float[] x_increments, y_increments;
+    
+    x_increments = this.sequencer.value_sequencer(this.position.x, this.newPosition.x, steps, type);
+    y_increments = this.sequencer.value_sequencer(this.position.y, this.newPosition.y, steps, type);
+    
+    PVector[] velocityIncrements = new PVector[x_increments.length];
+    for (int i = 0; i < x_increments.length; i++) {
+      velocityIncrements[i] = new PVector(x_increments[i], y_increments[i]);
+    }
+    
+    this.velocity_iter = new PVectorIterator(velocityIncrements);
 
+    this.finishedTranslating = false;
+  }
   public void translate(PVector newLoc, int steps, int type) {
     steps = (steps < 1) ? 1 : steps;
     this.newPosition = newLoc;
@@ -213,7 +250,6 @@ public class ShapeAgent {
     x_increments = this.sequencer.value_incrementer(this.position.x, this.newPosition.x, steps, type);
     y_increments = this.sequencer.value_incrementer(this.position.y, this.newPosition.y, steps, type);
     
-
     PVector[] velocityIncrements = new PVector[x_increments.length];
     for (int i = 0; i < x_increments.length; i++) {
       velocityIncrements[i] = new PVector(x_increments[i], y_increments[i]);
@@ -224,13 +260,16 @@ public class ShapeAgent {
     this.finishedTranslating = false;
   }
 
+
   public void translate(PVector newLoc, int steps) {
     this.translate(newLoc, steps, 1);
   }
 
+
   public void translate(PVector newLoc) {
     this.translate(newLoc, 1, 1);
   }
+
 
   public void translate(float x, float y, int steps, int type) {
     steps = (steps < 1) ? 1 : steps;
@@ -239,13 +278,16 @@ public class ShapeAgent {
     this.translate(newLoc, steps, type);
   }
 
+
   public void translate(float x, float y, int steps) {
     this.translate(x, y, steps, 1);
   }
 
+
   public void translate(float x, float y) {
     this.translate(x, y, 1, 1);
   }
+
 
   public void scale(float scaleFactor, int steps) {
     steps = (steps < 1) ? 1 : steps;
@@ -256,10 +298,12 @@ public class ShapeAgent {
     this.finishedScaling = false;
   }
 
+
   public void scale(float scaleFactor) {
     int steps = 1;
     this.scale(scaleFactor, steps);
   }
+
 
   public void perpetualRotate(float degree, boolean counterClock) {
     int direction = (counterClock) ? 1 : -1;
@@ -269,14 +313,17 @@ public class ShapeAgent {
     this.finishedRotating = false;
   }
 
+
   public void perpetualRotate(float degree) {
     this.perpetualRotate(degree, true);
   }
+
 
   public void disablePerpetualRotate() {
     this.perpetualRotate = false;
     this.finishedRotating = true;
   }
+
 
   public void colorStroke() {
     if (enableStroke) {
@@ -300,6 +347,7 @@ public class ShapeAgent {
     }
   }
 
+
   public void colorFill() {
     if (enableFill) {
       shpFill = this.fill_iter.next();
@@ -313,6 +361,7 @@ public class ShapeAgent {
       this.shapeObj.setFill(false);
     }
   }
+
 
   public void rotateShape() {
     if (perpetualRotate) {
@@ -328,18 +377,40 @@ public class ShapeAgent {
 
   }
 
+
   public void translateShape() {
     if (velocity_iter.hasNext()) {
-      this.translateIncrement = velocity_iter.next();
-      this.position.add(translateIncrement);
+      this.translateIncrement = this.velocity_iter.next();
+      this.position.add(this.translateIncrement);
 
-      // translateIncrement.rotate(-shpRotation);
-      // shapeObj.translate(translateIncrement.x,translateIncrement.y);
-      // translateIncrement.rotate(shpRotation);
+      //translateIncrement.rotate(-shpRotation);
+      this.shapeObj.rotate(-shpRotation);
+      this.shapeObj.translate(translateIncrement.x, translateIncrement.y);
+      this.shapeObj.rotate(shpRotation);
+      //translateIncrement.rotate(shpRotation);
     } else {
       this.finishedTranslating = true;
     }
   }
+  
+  
+  public void translateShape2() {
+    if (velocity_iter.hasNext()) {
+      this.translateIncrement = this.velocity_iter.next();
+      this.position = this.translateIncrement;
+      
+      //System.out.println("x:" + this.translateIncrement.x + " y: " + this.translateIncrement.y);
+      //translateIncrement.rotate(-shpRotation);
+      //this.shapeObj.rotate(-this.shpRotation);
+      //this.shapeObj.translate(translateIncrement.x, translateIncrement.y);
+      this.papp.translate(this.translateIncrement.x, this.translateIncrement.y);
+      //this.shapeObj.rotate(this.shpRotation);
+      //translateIncrement.rotate(shpRotation);
+    } else {
+      this.finishedTranslating = true;
+    }
+  }
+
 
   public void scaleShape() {
     if (scale_iter.hasNext()) {
@@ -350,32 +421,36 @@ public class ShapeAgent {
     }
   }
 
-//  public void labelShape() {
-//    if (enableText) {
-//      this.papp.textFont(textFont);
-//      this.papp.textAlign(textJustify);
-//      this.papp.fill(textFill);
-//      this.papp.text(textLabel, this.position.x, this.position.y);
-//    }
-//  }
+
+  // public void labelShape() {
+  // if (enableText) {
+  // this.papp.textFont(textFont);
+  // this.papp.textAlign(textJustify);
+  // this.papp.fill(textFill);
+  // this.papp.text(textLabel, this.position.x, this.position.y);
+  // }
+  // }
 
   void shapeOptions() {
 
   }
 
+
   void draw() {
-    this.papp.pushMatrix();
+//    this.papp.pushMatrix();
 
     this.colorFill();
     this.colorStroke();
-    this.translateShape();
+    //this.translateShape();
+    this.translateShape2();
     this.rotateShape();
     this.scaleShape();
     this.shapeOptions();
-//    this.labelShape();
+    // this.labelShape();
 
-    this.papp.shape(this.shapeObj, this.position.x, this.position.y);
+    this.papp.shape(this.shapeObj);
+    // this.papp.shape(this.shapeObj, this.position.x, this.position.y);
 
-    this.papp.popMatrix();
+//     this.papp.popMatrix();
   }
 }

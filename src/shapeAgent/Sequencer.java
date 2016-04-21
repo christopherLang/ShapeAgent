@@ -1,13 +1,15 @@
-package template.library;
+package shapeAgent;
 
 import processing.core.*;
 
 public class Sequencer {
   PApplet papp;
 
+
   public Sequencer(PApplet processingApp) {
     this.papp = processingApp;
   }
+
 
   public float[] value_sequencer(float init, float end, int steps, int type) {
     // type values
@@ -29,11 +31,13 @@ public class Sequencer {
     return sequence;
   }
 
+
   public float[] value_sequencer(float init, float end, int steps) {
     float[] sequence = value_sequencer(init, end, steps, 1);
 
     return sequence;
   }
+
 
   public int[] color_sequencer(int from, int to, int steps, int type) {
     int[] sequence = new int[steps + 1];
@@ -46,11 +50,13 @@ public class Sequencer {
     return sequence;
   }
 
+
   public int[] color_sequencer(int from, int to, int steps) {
     int[] sequence = this.color_sequencer(from, to, steps, 1);
 
     return sequence;
   }
+
 
   public float[] value_incrementer(float init, float end, int steps, int type) {
     // type values
@@ -64,6 +70,7 @@ public class Sequencer {
     return increments;
   }
 
+
   private float[] seq_linear(float init, float end, int steps) {
     steps = (steps < 1) ? 1 : steps;
     float total_change = end - init;
@@ -75,6 +82,7 @@ public class Sequencer {
 
     return sequence;
   }
+
 
   private float[] seq_quadraticEase_inout(float init, float end, int steps) {
     steps = (steps < 1) ? 1 : steps;
@@ -95,6 +103,7 @@ public class Sequencer {
     return sequence;
   }
 
+
   private float[] seq_quarticEase_inout(float init, float end, int steps) {
     steps = (steps < 1) ? 1 : steps;
     float total_change = end - init;
@@ -113,6 +122,7 @@ public class Sequencer {
 
     return sequence;
   }
+
 
   private float[] arrayIncrementer(float[] floatArray) {
     float[] increments = new float[floatArray.length - 1];

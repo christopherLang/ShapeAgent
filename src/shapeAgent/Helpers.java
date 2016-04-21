@@ -1,13 +1,15 @@
-package template.library;
+package shapeAgent;
 
 import processing.core.*;
 
 public class Helpers {
   PApplet papp;
 
+
   public Helpers(PApplet processingApp) {
     this.papp = processingApp;
   }
+
 
   public int colorAlpha(int hexColor, float alpha) {
     float colorRed = hexColor >> 16 & 0xFF;
