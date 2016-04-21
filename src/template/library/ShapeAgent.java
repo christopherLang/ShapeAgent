@@ -18,9 +18,9 @@ public class ShapeAgent {
   PShape shapeObj;
   PVector position;
   PVector newPosition;
-  int shpFill = this.papp.color(255, 255, 255);
+  int shpFill;
   float shpFillAlpha = 255;
-  int shpStroke = this.papp.color(255, 255, 255);
+  int shpStroke;
   float shpStrokeAlpha = 255;
   float shpStrokeWeight = 1;
   float shpRotation = 0;
@@ -42,24 +42,23 @@ public class ShapeAgent {
 
   PVector translateIncrement;
 
-  PFont textFont = this.papp.createFont("Arial", 14, true);;
-  String textLabel = "";
-  boolean enableText = false;
-  int textJustify = PApplet.CENTER;
-  int textFill = this.papp.color(0, 0, 0);
+//  PFont textFont;
+//  String textLabel = "";
+//  boolean enableText = false;
+//  int textJustify = PApplet.CENTER;
+//  int textFill;
 
-  ColorIterator stroke_iter = new ColorIterator(this.shpStroke);
-  ColorIterator fill_iter = new ColorIterator(this.shpFill);
-  FloatIterator strokeAlpha_iter = new FloatIterator(shpStrokeAlpha);
-  FloatIterator fillAlpha_iter = new FloatIterator(this.shpFillAlpha);
-  FloatIterator scale_iter = new FloatIterator(1);
-  FloatIterator strokeWeight_iter = new FloatIterator(this.shpStrokeWeight);
-  PVectorIterator velocity_iter = new PVectorIterator(0, 0);
-  FloatIterator rotate_iter = new FloatIterator(0);
+  ColorIterator stroke_iter;
+  ColorIterator fill_iter;
+  FloatIterator strokeAlpha_iter;
+  FloatIterator fillAlpha_iter;
+  FloatIterator scale_iter;
+  FloatIterator strokeWeight_iter;
+  PVectorIterator velocity_iter;
+  FloatIterator rotate_iter;
 
-  Sequencer sequencer = new Sequencer(this.papp);
-
-  Helpers helper = new Helpers(this.papp);
+  Sequencer sequencer;
+  Helpers helper;
   // public final static String VERSION = "##library.prettyVersion##";
 
   /**
@@ -71,6 +70,24 @@ public class ShapeAgent {
    */
   public ShapeAgent(PApplet processingApp) {
     this.papp = processingApp;
+    
+    this.shpFill = this.papp.color(255, 255, 255);
+    this.shpStroke = this.papp.color(255, 255, 255);
+//    this.textFont = this.papp.createFont("Arial", 14, true);
+//    this.textFill = this.papp.color(0, 0, 0);
+    
+    this.stroke_iter = new ColorIterator(this.shpStroke);
+    this.fill_iter = new ColorIterator(this.shpFill);
+    this.strokeAlpha_iter = new FloatIterator(shpStrokeAlpha);
+    this.fillAlpha_iter = new FloatIterator(this.shpFillAlpha);
+    this.scale_iter = new FloatIterator(1);
+    this.strokeWeight_iter = new FloatIterator(this.shpStrokeWeight);
+    this.velocity_iter = new PVectorIterator(0, 0);
+    this.rotate_iter = new FloatIterator(0);
+    
+    this.sequencer = new Sequencer(this.papp);
+    
+    this.helper = new Helpers(this.papp);
   }
 
   public void setStrokeColor(int strokeColor, int steps, int type) {
@@ -147,25 +164,25 @@ public class ShapeAgent {
     this.setFillAlpha(fillOpacity, 1, 1);
   }
 
-  public void setLabel(String text) {
-    this.textLabel = text;
-  }
-
-  public void setLabelFont(PFont newFont) {
-    this.textFont = newFont;
-  }
-
-  public void setLabelJustify(int justify) {
-    this.textJustify = justify;
-  }
-
-  public void enableLabel(boolean turnOnLabel) {
-    this.enableText = turnOnLabel;
-  }
-
-  public void setLabelColor(int labelColor) {
-    this.textFill = labelColor;
-  }
+//  public void setLabel(String text) {
+//    this.textLabel = text;
+//  }
+//
+//  public void setLabelFont(PFont newFont) {
+//    this.textFont = newFont;
+//  }
+//
+//  public void setLabelJustify(int justify) {
+//    this.textJustify = justify;
+//  }
+//
+//  public void enableLabel(boolean turnOnLabel) {
+//    this.enableText = turnOnLabel;
+//  }
+//
+//  public void setLabelColor(int labelColor) {
+//    this.textFill = labelColor;
+//  }
 
   public void rotate(float degrees, int steps, int type) {
     float initAngle = this.shpRotation;
@@ -195,6 +212,7 @@ public class ShapeAgent {
 
     x_increments = this.sequencer.value_incrementer(this.position.x, this.newPosition.x, steps, type);
     y_increments = this.sequencer.value_incrementer(this.position.y, this.newPosition.y, steps, type);
+    
 
     PVector[] velocityIncrements = new PVector[x_increments.length];
     for (int i = 0; i < x_increments.length; i++) {
@@ -332,14 +350,14 @@ public class ShapeAgent {
     }
   }
 
-  public void labelShape() {
-    if (enableText) {
-      this.papp.textFont(textFont);
-      this.papp.textAlign(textJustify);
-      this.papp.fill(textFill);
-      this.papp.text(textLabel, this.position.x, this.position.y);
-    }
-  }
+//  public void labelShape() {
+//    if (enableText) {
+//      this.papp.textFont(textFont);
+//      this.papp.textAlign(textJustify);
+//      this.papp.fill(textFill);
+//      this.papp.text(textLabel, this.position.x, this.position.y);
+//    }
+//  }
 
   void shapeOptions() {
 
@@ -354,7 +372,7 @@ public class ShapeAgent {
     this.rotateShape();
     this.scaleShape();
     this.shapeOptions();
-    this.labelShape();
+//    this.labelShape();
 
     this.papp.shape(this.shapeObj, this.position.x, this.position.y);
 

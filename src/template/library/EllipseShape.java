@@ -14,7 +14,7 @@ public class EllipseShape extends ShapeAgent {
 
     this.papp = processingApp;
 
-    this.shapeObj = this.papp.createShape(PApplet.ELLIPSE, x, y, shapeWidth, shapeHeight);
+    this.shapeObj = this.papp.createShape(PApplet.ELLIPSE, 0, 0, shapeWidth, shapeHeight);
     this.position = new PVector(x, y);
     this.shapeSize = new float[2];
     this.shapeSize[0] = shapeWidth;
