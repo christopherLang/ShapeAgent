@@ -6,7 +6,7 @@ import processing.core.*;
 public class TestLibrary extends PApplet {
   float diameter = 100.0f;
   RectShape a_rect;
-  RectShape[] n_rects = new RectShape[10000];
+  RectShape[] n_rects = new RectShape[100];
   PVector position;
   float marginPercent;
 
@@ -16,7 +16,7 @@ public class TestLibrary extends PApplet {
 
   public void settings() {
     // size(500, 500, P2D);
-    fullScreen(FX2D);
+    fullScreen();
 
   }
 
@@ -31,6 +31,7 @@ public class TestLibrary extends PApplet {
     for (int i = 0; i < n_rects.length; i++) {
       n_rects[i] = new RectShape(this, 0, 0, 2, 2);
       n_rects[i].enableHover(true);
+      n_rects[i].setStrokeColor(false);
     }
 
     marginPercent = 20 / 100;

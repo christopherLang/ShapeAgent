@@ -13,32 +13,32 @@ import processing.core.*;
  * @example Hello
  */
 
-public class ShapeAgent {
-  PApplet papp; // reference to parent sketch
-  PShape shapeObj;
-  PVector position;
-  PVector newPosition;
-  int shpFill;
-  float shpFillAlpha = 255;
-  int shpStroke;
-  float shpStrokeAlpha = 255;
-  float shpStrokeWeight = 1;
-  float shpRotation = 0;
-  float shpScale = 1;
-  boolean enableStroke = true;
-  boolean enableFill = true;
+public abstract class ShapeAgent {
+  public PApplet papp; // reference to parent sketch
+  public PShape shapeObj;
+  public PVector position;
+  public PVector newPosition;
+  public int shpFill;
+  public float shpFillAlpha = 255;
+  public int shpStroke;
+  public float shpStrokeAlpha = 255;
+  public float shpStrokeWeight = 1;
+  public float shpRotation = 0;
+  public float shpScale = 1;
+  public boolean enableStroke = true;
+  public boolean enableFill = true;
 
-  boolean perpetualRotate = false;
-  float perpetualRotateIncrement;
+  public boolean perpetualRotate = false;
+  public float perpetualRotateIncrement;
 
-  boolean finishedRotating = true;
-  boolean finishedTranslating = true;
-  boolean finishedScaling = true;
-  boolean finishedFill = true;
-  boolean finishedFillAlpha = true;
-  boolean finishedStroke = true;
-  boolean finishedStrokeAlpha = true;
-  boolean finishedStrokeThickness = true;
+  public boolean finishedRotating = true;
+  public boolean finishedTranslating = true;
+  public boolean finishedScaling = true;
+  public boolean finishedFill = true;
+  public boolean finishedFillAlpha = true;
+  public boolean finishedStroke = true;
+  public boolean finishedStrokeAlpha = true;
+  public boolean finishedStrokeThickness = true;
 
   // PFont textFont;
   // String textLabel = "";
@@ -46,17 +46,17 @@ public class ShapeAgent {
   // int textJustify = PApplet.CENTER;
   // int textFill;
 
-  ColorIterator stroke_iter;
-  ColorIterator fill_iter;
-  FloatIterator strokeAlpha_iter;
-  FloatIterator fillAlpha_iter;
-  FloatIterator scale_iter;
-  FloatIterator strokeWeight_iter;
-  PVectorIterator velocity_iter;
-  FloatIterator rotate_iter;
+  public ColorIterator stroke_iter;
+  public ColorIterator fill_iter;
+  public FloatIterator strokeAlpha_iter;
+  public FloatIterator fillAlpha_iter;
+  public FloatIterator scale_iter;
+  public FloatIterator strokeWeight_iter;
+  public PVectorIterator velocity_iter;
+  public FloatIterator rotate_iter;
 
-  Sequencer sequencer;
-  Helpers helper;
+  public Sequencer sequencer;
+  public Helpers helper;
   // public final static String VERSION = "##library.prettyVersion##";
 
 
@@ -105,6 +105,11 @@ public class ShapeAgent {
 
   public void setStrokeColor(int strokeColor) {
     this.setStrokeColor(strokeColor, 1, 1);
+  }
+  
+  
+  public void setStrokeColor(boolean enableStroke) {
+    this.shapeObj.setStroke(enableStroke);
   }
 
 
@@ -306,7 +311,7 @@ public class ShapeAgent {
   }
 
 
-  public void colorStroke() {
+  private void colorStroke() {
     if (this.enableStroke) {
       this.shpStroke = this.stroke_iter.next();
       this.shpStrokeAlpha = this.strokeAlpha_iter.next();
@@ -325,7 +330,7 @@ public class ShapeAgent {
   }
 
 
-  public void colorFill() {
+  private void colorFill() {
     if (enableFill) {
       this.shpFill = this.fill_iter.next();
       this.shpFillAlpha = this.fillAlpha_iter.next();
@@ -340,7 +345,7 @@ public class ShapeAgent {
   }
 
 
-  public void rotateShape() {
+  private void rotateShape() {
     if (perpetualRotate) {
       this.shpRotation += this.perpetualRotateIncrement;
     } else if (this.rotate_iter.hasNext()) {
@@ -354,7 +359,7 @@ public class ShapeAgent {
   }
 
 
-  public void translateShape() {
+  private void translateShape() {
     if (this.velocity_iter.hasNext()) {
       this.position.add(this.velocity_iter.next());
     } else {
@@ -365,7 +370,7 @@ public class ShapeAgent {
   }
 
 
-  public void scaleShape() {
+  private void scaleShape() {
     if (scale_iter.hasNext()) {
       this.shpScale = this.scale_iter.next();
       this.shapeObj.scale(this.shpScale);
@@ -384,12 +389,12 @@ public class ShapeAgent {
   // }
   // }
 
-  void shapeOptions() {
+  public void shapeOptions() {
 
   }
 
 
-  void draw() {
+  public void draw() {
     this.papp.pushMatrix();
 
     this.colorFill();
