@@ -2,20 +2,6 @@
 <classpath>
 	<classpathentry kind="src" output="bin" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/core.jar"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/gluegen-rt.jar"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/gluegen-rt-natives-linux-amd64.jar"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/gluegen-rt-natives-linux-armv6hf.jar"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/gluegen-rt-natives-linux-i586.jar"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/gluegen-rt-natives-macosx-universal.jar"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/gluegen-rt-natives-windows-amd64.jar"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/gluegen-rt-natives-windows-i586.jar"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/jogl-all.jar"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/jogl-all-natives-linux-amd64.jar"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/jogl-all-natives-linux-armv6hf.jar"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/jogl-all-natives-linux-i586.jar"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/jogl-all-natives-macosx-universal.jar"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/jogl-all-natives-windows-amd64.jar"/>
-	<classpathentry kind="lib" path="C:/Users/christopher.lang/lib/processing3_lib/jogl-all-natives-windows-i586.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ProcessingCore-311"/>
 	<classpathentry kind="output" path="resources/code"/>
 </classpath>

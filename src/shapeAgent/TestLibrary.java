@@ -6,7 +6,7 @@ import processing.core.*;
 public class TestLibrary extends PApplet {
   float diameter = 100.0f;
   RectShape a_rect;
-  RectShape[] n_rects = new RectShape[100];
+  RectShape[] n_rects = new RectShape[10000];
   PVector position;
   float marginPercent;
 
@@ -16,7 +16,7 @@ public class TestLibrary extends PApplet {
 
   public void settings() {
     // size(500, 500, P2D);
-    fullScreen();
+    fullScreen(FX2D);
 
   }
 

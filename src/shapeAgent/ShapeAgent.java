@@ -3,16 +3,12 @@ package shapeAgent;
 import processing.core.*;
 
 /**
- * This is a template class and can be used to start a new processing Library.
- * Make sure you rename this class as well as the name of the example package
- * 'template' to your own Library naming convention.
- * 
- * (the tag example followed by the name of an example included in folder
- * 'examples' will automatically include the example in the javadoc.)
- *
- * @example Hello
+ * Base abstract class for inheritance. Provides the key methods for color, 
+ * movement, and transparency changes with easing and linear interpolation
+ * <p>
+ * Not to be used directly. This class does not define the Processing shapes
+ * needed to work
  */
-
 public abstract class ShapeAgent {
   public PApplet papp; // reference to parent sketch
   public PShape shapeObj;
@@ -61,11 +57,11 @@ public abstract class ShapeAgent {
 
 
   /**
-   * a Constructor, usually called in the setup() method in your sketch to
-   * initialize and start the Library.
+   * Constructor of ShapeAgent. Not to be used directly but for inheriting 
+   * into other classes.
    * 
-   * @example Hello
-   * @param theParent
+   * @param processingApp
+   * The processing PApplet to draw on
    */
   public ShapeAgent(PApplet processingApp) {
     this.papp = processingApp;
@@ -89,7 +85,14 @@ public abstract class ShapeAgent {
     this.helper = new Helpers(this.papp);
   }
 
-
+  /**
+   * <h1> Set the shape's stroke color </h1>
+   * 
+   * @param strokeColor color integer to color the stroke
+   * @param steps number of frames for linear interpolation of color
+   * @param type the type of easing. 1 for linear, 4 for quad, 5 for quartic
+   * 
+   */
   public void setStrokeColor(int strokeColor, int steps, int type) {
     int[] colorGradient = this.sequencer.color_sequencer(shpStroke, strokeColor, steps, type);
     this.stroke_iter = new ColorIterator(colorGradient);
@@ -97,39 +100,85 @@ public abstract class ShapeAgent {
     this.finishedStroke = false;
   }
 
-
+  /**
+   * <h1> Set the shape's stroke color </h1>
+   * <p>
+   * This defaults to linear easing
+   * </p>
+   * @param strokeColor color integer to color the stroke
+   * @param steps number of frames for linear interpolation of color
+   * 
+   */
   public void setStrokeColor(int strokeColor, int steps) {
     this.setStrokeColor(strokeColor, steps, 1);
   }
 
-
+  /**
+   * <h1> Set the shape's stroke color </h1>
+   * <p>
+   * This defaults to linear easing and instant color change (1 frame)
+   * </p>
+   * @param strokeColor color integer to color the stroke
+   * @param steps number of frames for linear interpolation of color
+   */
   public void setStrokeColor(int strokeColor) {
     this.setStrokeColor(strokeColor, 1, 1);
   }
   
-  
+  /**
+   * <h1> Enable or disable stroke color </h1>
+   * <p>
+   * Set to {@True} (the default) to enable stroke coloring
+   * </p>
+   * @param enableStroke enable or disable stroke coloring
+   */
   public void setStrokeColor(boolean enableStroke) {
     this.shapeObj.setStroke(enableStroke);
   }
 
-
+  /**
+   * <h1> Set stroke color transparency </h1>
+   * <p>
+   * @param strokeOpacity a float indicating the opacity. Relative to color range
+   * @param steps number of frames for linear interpolation of opacity
+   * @param type the type of easing. 1 for linear, 4 for quad, 5 for quartic
+   */
   public void setStrokeAlpha(float strokeOpacity, int steps, int type) {
     float[] opacityGradient = this.sequencer.value_sequencer(shpStrokeAlpha, strokeOpacity, steps, type);
     this.strokeAlpha_iter = new FloatIterator(opacityGradient);
     this.finishedStrokeAlpha = false;
   }
 
-
+  /**
+   * <h1> Set stroke color transparency </h1>
+   * <p>
+   * This defaults to linear easing
+   * </p>
+   * @param strokeOpacity a float indicating the opacity. Relative to color range
+   * @param steps number of frames for linear interpolation of opacity
+   */
   public void setStrokeAlpha(float strokeOpacity, int steps) {
     this.setStrokeAlpha(strokeOpacity, steps, 1);
   }
 
-
+  /**
+   * <h1> Set stroke color transparency </h1>
+   * <p>
+   * This defaults to linear easing and instant transparency change (1 frame)
+   * </p>
+   * @param strokeOpacity a float indicating the opacity. Relative to color range
+   */
   public void setStrokeAlpha(float strokeOpacity) {
     this.setStrokeAlpha(strokeOpacity, 1, 1);
   }
 
-
+  /**
+   * <h1> Set stroke thickness </h1>
+   * <p>
+   * @param strokeOpacity a float indicating the stroke thickness
+   * @param steps number of frames for linear interpolation of opacity
+   * @param type the type of easing. 1 for linear, 4 for quad, 5 for quartic
+   */
   public void setStrokeThickness(float weight, int steps, int type) {
     float[] thicknessGradient = this.sequencer.value_sequencer(shpStrokeWeight, weight, steps, type);
     this.strokeWeight_iter = new FloatIterator(thicknessGradient);
@@ -137,17 +186,35 @@ public abstract class ShapeAgent {
     this.finishedStrokeThickness = false;
   }
 
-
+  /**
+   * <h1> Set stroke thickness </h1>
+   * <p>
+   * This defaults to linear easing
+   * @param strokeOpacity a float indicating the stroke thickness
+   * @param steps number of frames for linear interpolation of opacity
+   */
   public void setStrokeThickness(float weight, int steps) {
     this.setStrokeThickness(weight, steps, 1);
   }
 
-
+  /**
+   * <h1> Set stroke thickness </h1>
+   * <p>
+   * This defaults to linear easing and instant thickness change (1 frame)
+   * @param strokeOpacity a float indicating the stroke thickness
+   * @param steps number of frames for linear interpolation of opacity
+   */
   public void setStrokeThickness(float weight) {
     this.setStrokeThickness(weight, 1, 1);
   }
 
-
+  /**
+   * <h1> Set fill color of shape </h1>
+   * <p>
+   * @param fillColor an integer indicating fill color
+   * @param steps number of frames for linear interpolation of color
+   * @param type the type of easing. 1 for linear, 4 for quad, 5 for quartic
+   */
   public void setFillColor(int fillColor, int steps, int type) {
     int[] colorGradient = this.sequencer.color_sequencer(shpFill, fillColor, steps, type);
     this.fill_iter = new ColorIterator(colorGradient);
@@ -155,17 +222,36 @@ public abstract class ShapeAgent {
     this.finishedFill = false;
   }
 
-
+  /**
+   * <h1> Set fill color of shape </h1>
+   * <p>
+   * This defaults to linear easing
+   * </p>
+   * @param fillColor an integer indicating fill color
+   * @param steps number of frames for linear interpolation of color
+   */
   public void setFillColor(int fillColor, int steps) {
     this.setFillColor(fillColor, steps, 1);
   }
 
-
+  /**
+   * <h1> Set fill color of shape </h1>
+   * <p>
+   * This defaults to linear easing and instant color change (1 frame)
+   * </p>
+   * @param fillColor an integer indicating fill color
+   */
   public void setFillColor(int fillColor) {
     this.setFillColor(fillColor, 1, 1);
   }
 
-
+  /**
+   * <h1> Set fill transparency of shape </h1>
+   * <p>
+   * @param fillOpacity a float indicating opacity. Relative to color range
+   * @param steps number of frames for linear interpolation of color
+   * @param type the type of easing. 1 for linear, 4 for quad, 5 for quartic
+   */
   public void setFillAlpha(float fillOpacity, int steps, int type) {
     float[] opacityGradient = this.sequencer.value_sequencer(shpFillAlpha, fillOpacity, steps, type);
     this.fillAlpha_iter = new FloatIterator(opacityGradient);
@@ -173,12 +259,25 @@ public abstract class ShapeAgent {
     this.finishedFillAlpha = false;
   }
 
-
+  /**
+   * <h1> Set fill transparency of shape </h1>
+   * <p>
+   * This defaults to linear easing
+   * </p>
+   * @param fillOpacity a float indicating opacity. Relative to color range
+   * @param steps number of frames for linear interpolation of color
+   */
   public void setFillAlpha(float fillOpacity, int steps) {
     this.setFillAlpha(fillOpacity, steps, 1);
   }
 
-
+  /**
+   * <h1> Set fill transparency of shape </h1>
+   * <p>
+   * This defaults to linear easing and instant transparency change (1 frame)
+   * </p>
+   * @param fillOpacity a float indicating opacity. Relative to color range
+   */
   public void setFillAlpha(float fillOpacity) {
     this.setFillAlpha(fillOpacity, 1, 1);
   }
@@ -203,7 +302,16 @@ public abstract class ShapeAgent {
   // public void setLabelColor(int labelColor) {
   // this.textFill = labelColor;
   // }
-
+  /**
+   * <h1> Rotate shape in place </h1>
+   * <p>
+   * Rotation is relative to center point of shape. Positive values indicate 
+   * clock-wise rotation, negative is counter clock-wise rotation
+   * </p>
+   * @param degrees a float indicating degree of rotation (not radians)
+   * @param steps number of frames for linear interpolation of rotation
+   * @param type the type of easing. 1 for linear, 4 for quad, 5 for quartic
+   */
   public void rotate(float degrees, int steps, int type) {
     float initAngle = this.shpRotation;
     float endAngle = initAngle + PApplet.radians(degrees);
@@ -216,17 +324,46 @@ public abstract class ShapeAgent {
     this.finishedRotating = false;
   }
 
-
+  /**
+   * <h1> Rotate shape in place </h1>
+   * <p>
+   * Rotation is relative to center point of shape. Positive values indicate 
+   * clock-wise rotation, negative is counter clock-wise rotation
+   * </p>
+   * <p>
+   * This defaults to linear easing
+   * </p>
+   * @param degrees a float indicating degree of rotation (not radians)
+   * @param steps number of frames for linear interpolation of rotation
+   */
   public void rotate(float degrees, int steps) {
     this.rotate(degrees, steps, 1);
   }
 
-
+  /**
+   * <h1> Rotate shape in place </h1>
+   * <p>
+   * Rotation is relative to center point of the shape. Positive values indicate 
+   * clock-wise rotation, negative is counter clock-wise rotation
+   * </p>
+   * <p>
+   * This defaults to linear easing and instant rotation (1 frame)
+   * </p>
+   * @param degrees a float indicating degree of rotation (not radians)
+   */
   public void rotate(float degrees) {
     this.rotate(degrees, 1, 1);
   }
 
-
+  /**
+   * <h1> Translate a shape </h1>
+   * <p>
+   * Translation is relative to the center of the shape
+   * </p>
+   * @param newLoc a {@code PVector} indicating location to translate to
+   * @param steps number of frames for linear interpolation of translation
+   * @param type the type of easing. 1 for linear, 4 for quad, 5 for quartic
+   */
   public void translate(PVector newLoc, int steps, int type) {
     steps = (steps < 1) ? 1 : steps;
     this.newPosition = newLoc;
@@ -246,17 +383,45 @@ public abstract class ShapeAgent {
     this.finishedTranslating = false;
   }
 
-
+  /**
+   * <h1> Translate a shape </h1>
+   * <p>
+   * Translation is relative to the center of the shape
+   * </p>
+   * <p>
+   * This defaults to linear easing
+   * </p>
+   * @param newLoc a {@code PVector} indicating location to translate to
+   * @param steps number of frames for linear interpolation of translation
+   */
   public void translate(PVector newLoc, int steps) {
     this.translate(newLoc, steps, 1);
   }
 
-
+  /**
+   * <h1> Translate a shape </h1>
+   * <p>
+   * Translation is relative to the center of the shape
+   * </p>
+   * <p>
+   * This defaults to linear easing and instant translation (1 frame)
+   * </p>
+   * @param newLoc a {@code PVector} indicating location to translate to
+   */
   public void translate(PVector newLoc) {
     this.translate(newLoc, 1, 1);
   }
 
-
+  /**
+   * <h1> Translate a shape </h1>
+   * <p>
+   * Translation is relative to the center of the shape
+   * </p>
+   * @param x a float indicating the {@code x} position to translate to
+   * @param y a float indicating the {@code y} position to translate to
+   * @param steps number of frames for linear interpolation of translation
+   * @param type the type of easing. 1 for linear, 4 for quad, 5 for quartic
+   */
   public void translate(float x, float y, int steps, int type) {
     steps = (steps < 1) ? 1 : steps;
 
@@ -264,17 +429,45 @@ public abstract class ShapeAgent {
     this.translate(newLoc, steps, type);
   }
 
-
+  /**
+   * <h1> Translate a shape </h1>
+   * <p>
+   * Translation is relative to the center of the shape
+   * </p>
+   * <p>
+   * This defaults to linear easing
+   * </p>
+   * @param x a float indicating the {@code x} position to translate to
+   * @param y a float indicating the {@code y} position to translate to
+   * @param steps number of frames for linear interpolation of translation
+   */
   public void translate(float x, float y, int steps) {
     this.translate(x, y, steps, 1);
   }
 
-
+  /**
+   * <h1> Translate a shape </h1>
+   * <p>
+   * Translation is relative to the center of the shape
+   * </p>
+   * <p>
+   * This defaults to linear easing and instant translation (1 frame)
+   * </p>
+   * @param x a float indicating the {@code x} position to translate to
+   * @param y a float indicating the {@code y} position to translate to
+   */
   public void translate(float x, float y) {
     this.translate(x, y, 1, 1);
   }
 
-
+  /**
+   * <h1> Change scale of the shape </h1>
+   * <p>
+   * Scale is multiplicative, not additive
+   * </p>
+   * @param scaleFactor a float indicating the scaling factor
+   * @param steps number of frames for linear interpolation of scale
+   */
   public void scale(float scaleFactor, int steps) {
     steps = (steps < 1) ? 1 : steps;
 
@@ -284,13 +477,29 @@ public abstract class ShapeAgent {
     this.finishedScaling = false;
   }
 
-
+  /**
+   * <h1> Change scale of the shape </h1>
+   * <p>
+   * Scale is multiplicative, not additive
+   * </p>
+   * <p>
+   * This defaults to linear easing
+   * </p>
+   * @param scaleFactor a float indicating the scaling factor
+   */
   public void scale(float scaleFactor) {
     int steps = 1;
     this.scale(scaleFactor, steps);
   }
 
-
+  /**
+   * <h1> Enable perpetual rotation about center </h1>
+   * <p>
+   * Setting this enables perpetual rotation regardless of previous state
+   * </p>
+   * @param degree the degree (not radians) to rotate per frame
+   * @param counterClock a negative value rotates counter, otherwise clockwise
+   */
   public void perpetualRotate(float degree, boolean counterClock) {
     int direction = (counterClock) ? 1 : -1;
     this.perpetualRotateIncrement = PApplet.radians(degree) * direction;
@@ -299,12 +508,24 @@ public abstract class ShapeAgent {
     this.finishedRotating = false;
   }
 
-
+  /**
+   * <h1> Enable perpetual rotation about center </h1>
+   * <p>
+   * Setting this enables perpetual rotation regardless of previous state
+   * </p>
+   * <p>
+   * This defaults to the value of {@code degree} in regards to direction
+   * </p>
+   * @param degree the degree (not radians) to rotate per frame
+   */
   public void perpetualRotate(float degree) {
     this.perpetualRotate(degree, true);
   }
 
-
+  /**
+   * <h1> Disable perpetual rotation about center </h1>
+   * <p>
+   */
   public void disablePerpetualRotate() {
     this.perpetualRotate = false;
     this.finishedRotating = true;
@@ -393,7 +614,9 @@ public abstract class ShapeAgent {
 
   }
 
-
+  /**
+   * <h1> Render the shape onto canvas </h1>
+   */
   public void draw() {
     this.papp.pushMatrix();
 
